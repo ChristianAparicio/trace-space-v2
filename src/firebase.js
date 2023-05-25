@@ -13,16 +13,16 @@ import {
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
 import { userValidation } from './userValidation.js'
-
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyDjub3JUawNfCOvZ_tplgvMMQygJnBFUJo",
-    authDomain: "fir-prog-web-may8.firebaseapp.com",
-    projectId: "fir-prog-web-may8",
-    storageBucket: "fir-prog-web-may8.appspot.com",
-    messagingSenderId: "818175036896",
-    appId: "1:818175036896:web:6436634612f079a8d0af85",
-};
+    apiKey: "AIzaSyCegClXUXpAVwG0p3iCYkYS2fpK0Pd36gM",
+    authDomain: "logintracespace.firebaseapp.com",
+    databaseURL: "https://logintracespace-default-rtdb.firebaseio.com",
+    projectId: "logintracespace",
+    storageBucket: "logintracespace.appspot.com",
+    messagingSenderId: "1009166054959",
+    appId: "1:1009166054959:web:0a9eab0425e3252a32f8da"
+  };
 
 // Initialize Firebase, firestore, Storage, Auth
 const app = initializeApp(firebaseConfig);
@@ -143,4 +143,8 @@ export async function addUserToDB(userData, uid) {
     } catch (e) {
         console.error("Error adding user: ", e);
     }
+}
+
+export {
+    app, db, auth
 }
