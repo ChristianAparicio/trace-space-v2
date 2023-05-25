@@ -1,27 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="login.css">
 </head>
-
 <body>
+    
 
-    <section>
-        <h1>Inicia Sesion</h1>
-        <label for="email">Email:</label>
-        <input type="text" name="email" id="email-input">
-        <label for="password">Password:</label>
-        <input type="password" name="password" id="pass-input">
-        <button id="button-log-in">Iniciar Sesion</button>
-        <br>
-        <p>¿No tienes una cuenta? <a href="/sign-in/">Creala aqui</a></p>
-    </section>
+        <div id="content_container">
+            <div id="form_container">
+                <div id="form_header_container">
+                    <h2 id="form_header"> Login + Firebase Database </h2>
+                </div>
 
-    <script type="module" src="./log-in.js"></script>
+                <div id="form_content_container">
+                    <div id="form_content_inner_container">
+                        <input type="text" id="full_name" placeholder="Full name">
+                        <input type="email" id="email" placeholder="Email">
+                        <input type="password" id="password" placeholder="New Password">
+
+                       
+
+                        <div id="button_container">
+                            <button id="loginButton">Login</button>
+                            <button id="resgisterButton" >Register</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
 </body>
 
+
+
+
+
+<script src="log-in.js" type="module"> </script>
 </html>
