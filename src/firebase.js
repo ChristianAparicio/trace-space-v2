@@ -88,7 +88,7 @@ export async function createUser(email, password, username, file) {
     try {
         const userCredential = await createUserWithEmailAndPassword(
             auth,
-            email,
+            emil,
             password
         );
 
