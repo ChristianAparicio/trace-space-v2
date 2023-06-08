@@ -55,13 +55,6 @@ export async function createProductCollection() {
 }
 
 // Call the function to create the collection and add products
-createProductCollection()
-  .then(() => {
-    console.log("Product collection creation completed");
-  })
-  .catch((error) => {
-    console.error("Error creating product collection: ", error);
-  });
 
 onAuthStateChanged(auth, (user) => {
   console.log('hubo un cambio en auth');
@@ -191,5 +184,6 @@ export async function addUserToDB(userData, uid) {
 export {
   app,
   db,
-  auth
+  auth,
+  storage
 };

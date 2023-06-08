@@ -3,9 +3,13 @@ import { logInUser } from '../firebase.js'
 import{ app, db, auth}from "../firebase.js"
 import {createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
 import {doc,setDoc} from "firebase/firestore"
+export{logIn}
+
+//signOut(auth)
 
 const buttonLogIn = document.querySelector('#loginButton')
 buttonLogIn.addEventListener('click', () => logIn())
+let logged= false;
 
 async function logIn() {
     const email = document.getElementById('email').value
@@ -16,6 +20,7 @@ async function logIn() {
     if (userCreated.status) {
         alert('Sesion iniciada, uid: ' + userCreated.info)
         window.location.href= "../index.html"
+        logged=true;
     } else {
         alert(userCreated.info)
     }
@@ -25,11 +30,6 @@ async function logIn() {
 
 
   //registro
-  let registerButton = document.getElementById("resgisterButton")
-  registerButton.addEventListener("click",(e)=>{register()})
-
-  let loginButton = document.getElementById("loginButton")
-  loginButton.addEventListener("click", (e)=>{login()})
 
   async function register(){
     let email = document.getElementById('email').value;

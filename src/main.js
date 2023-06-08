@@ -19,8 +19,8 @@ import { getProducts } from './firebase.js'
          const elem = document.createElement('div')
          elem.className = 'product'
          elem.innerHTML = `
-     <h2>${product.name}</h2>
-     <img src="${product.url}" alt="${'reference Image for '+ product.name}" />    
+     <h2>${product.Name}</h2>
+     <img src="${product.img1}" alt="${'reference Image for '+ product.Name}" />    
      `
          container.append(elem)
      })
