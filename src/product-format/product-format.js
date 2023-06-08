@@ -20,7 +20,13 @@ async function upload() {
     let Description = document.getElementById('Description').value;
 
     let mainImage = document.getElementById('img1').files[0]
-    let urlMainImage = await subirImagen(mainImage)
+    let img1= await subirImagen(mainImage)
+
+    let detailImage = document.getElementById('img2').files[0]
+    let img2 = await subirImagen(detailImage)
+
+    let secondDetailImage = document.getElementById('img3').files[0]
+    let img3 = await subirImagen(secondDetailImage)
     
     
 
@@ -45,7 +51,9 @@ async function upload() {
             year: year,
             Author: Author,
             Description: Description,
-            urlMainImage : urlMainImage,
+            img1:img1,
+           img2:img2,
+            img3:img3,
             id: docs.length + 1
         })
 
