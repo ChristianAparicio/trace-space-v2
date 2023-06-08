@@ -98,7 +98,7 @@ class CardFilter extends HTMLElement {
             <div class="form-group">
               <label for="authorInput">Author</label>
               <select name="author" id="authorSelect" class="form-control btn btn-dark">
-                <option value="">Autor</option>
+                <option value="">Author</option>
                 ${options(this.data, 'Author').join('')}
               </select>
             </div>
@@ -117,6 +117,7 @@ class CardFilter extends HTMLElement {
         <div class="container">
           <div class="row">
             ${filteredData.map((product) => {
+              const price = product.Price !== undefined ? product.Price.toString() : '';
               return `
                 <div class="col-md-4">
                   <div class="card">
@@ -124,8 +125,8 @@ class CardFilter extends HTMLElement {
                     <div class="card-body card-hover">
                       <h3 class="card-title">${product.Name}</h3>
                       <p class="card-text">${product.Description}</p>
-                      <h5 class="card-price">$${product.Price.toString()}</h5>
-                      <a href="./detail.html?id=${product.id}" class="btn btn-primary shop_now"><i class="bi-cart"></i>Buy Now</a>
+                      <h5 class="card-price">$${price}</h5>
+                      <a href="./detail.html?id=${product.numId}" class="btn btn-primary shop_now" data-id="${product.id}"><i class="bi-cart"></i>Buy Now</a>
                     </div>
                   </div>
                 </div>
@@ -147,3 +148,18 @@ class CardFilter extends HTMLElement {
 }
 
 customElements.define('card-filter', CardFilter);
+
+// Obtén una referencia al componente card-filter
+const cardFilter = document.querySelector('card-filter');
+
+// Agrega un evento click al componente card-filter
+cardFilter.addEventListener('click', (event) => {
+  // Verifica si el botón "Shop Now" fue el elemento clickeado
+  if (event.target.classList.contains('shop_now')) {
+    // Obtén el ID del producto desde el atributo data-id del botón
+    const productId = event.target.getAttribute('data-id');
+    // Utiliza el ID del producto como desees (por ejemplo, redirecciona a la página de detalles del producto)
+    console.log(productId);
+    // Aquí puedes redireccionar a la página de detalles del producto o realizar alguna otra acción con el ID del producto
+  }
+});
