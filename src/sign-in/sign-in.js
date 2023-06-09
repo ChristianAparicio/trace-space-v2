@@ -1,8 +1,11 @@
 import '../global.scss'
 import { logInUser } from '../firebase.js'
-import{ app, db, auth}from "../firebase.js"
+import{ app, db, auth,storage}from "../firebase.js"
 import {createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
 import {doc,setDoc} from "firebase/firestore"
+
+
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 
 
 async function logIn() {
@@ -33,6 +36,10 @@ async function logIn() {
     let email = document.getElementById('email').value;
     let password = document.getElementById('password').value;
     let full_name = document.getElementById('full_name').value;
+
+    let mainImage = document.getElementById('profileimg').files[0]
+    let img1= await subirImagen(mainImage)
+ 
   
 
   // Validate input fields
@@ -54,14 +61,15 @@ async function logIn() {
       var user_data = {
         email : email,
         full_name : full_name,
-        last_login : Date.now()
+        last_login : Date.now(),
+        pic:pic,
       }
 
       await setDoc(doc(db, "users", userId), user_data);
 
      
   } catch (e) {
-      console.log(e.code);
+      
       if (e.code === "auth/email-already-in-use") {
           alert("Email is in use");
       }
@@ -84,7 +92,8 @@ async function logIn() {
     var user_data = {
       email : email,
       full_name : full_name,
-      last_login : Date.now()
+      last_login : Date.now(),
+      pic:pic,
     }
 
     // Push to Firebase Database
@@ -184,3 +193,23 @@ function login () {
       return true
     }
   }
+
+  async function subirImagen(file) {
+    try {
+        const image = await subirImagenReferencia(file);
+        return getDownloadURL(ref(storage, image.ref.fullPath))
+    } catch (error) {
+      console.log(error);
+    }
+}
+
+async function subirImagenReferencia(file) {
+  try {
+      const storageRef = ref(storage, `images/profile/${file.name}`);
+      return await uploadBytes(storageRef, file);
+
+  } catch (error) {
+      console.log(error);
+  }
+}
+

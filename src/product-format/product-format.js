@@ -13,6 +13,7 @@ uploadButton.addEventListener("click", (e) => { upload() })
 
 async function upload() {
     let Name = document.getElementById('Name').value;
+    let Price = document.getElementById('Price').value;
     let Collection = document.getElementById('Collection').value;
     let ProductType = document.getElementById('ProductType').value;
     let year = document.getElementById('year').value;
@@ -46,6 +47,7 @@ async function upload() {
 
         await addDoc(collection(db, 'products'), {
             Name: Name,
+            Price:Price,
             Collection: Collection,
             ProductType: ProductType,
             year: year,
@@ -54,7 +56,7 @@ async function upload() {
             img1:img1,
            img2:img2,
             img3:img3,
-            id: docs.length + 1
+            numId: docs.length + 1
         })
 
 
