@@ -1,11 +1,4 @@
 
-
-
-
-
-
-
-
 import {getProducts} from "../../firebase.js";
 
 let list = [];
@@ -16,43 +9,51 @@ let productId = searchParas.get("id").replace('"',"");
 console.log(productId);
 
 class cardwrapper extends HTMLElement {
-    static get observedAttributes(){
-        return['class']
-    }
-    constructor(){
-        super();
-        this.attachShadow({mode:'open'})
-    }
-    connectedCallback(){
-        this.printData();
-    }
-    attributeChangeCallback(attrName, oldValue, newValue){
-        this[attrName] = newValue;
-        this.printData();
+  static get observedAttributes() {
+    return ['class'];
+  }
+
+  constructor() {
+    super();
+    this.attachShadow({ mode: 'open' });
+  }
+
+  connectedCallback() {
+    this.printData();
+  }
+
+  attributeChangeCallback(attrName, oldValue, newValue) {
+    this[attrName] = newValue;
+    this.printData();
+  }
+
+  async printData() {
+    getProducts().then((a) => {
+      list = a;
+      console.log('list:', list); // Verifica el contenido de list en la consola
+
+      const product = list[productId]; // Obtiene el producto específico usando el índice productId
+      if (product) {
+        this.render(product); // Pasa el producto específico a la función render()
+      } else {
+        console.log('Producto no encontrado');
+      }
+    });
+  }
+
+  slideImage(imgId) {
+    const displayWidth = this.shadowRoot.querySelector('.img-showcase img:first-child').clientWidth;
+
+    this.shadowRoot.querySelector('.img-showcase').style.transform = `translateX(${- (imgId - 1) * displayWidth}px)`;
+  }
+
+ addToCart(product) {
+  const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+  cartItems.push(product);
+  localStorage.setItem('cartItems', JSON.stringify(cartItems));
+  console.log('Producto agregado al carrito:', product);
 }
 
-
-
-
-async printData() {
-  getProducts().then((a) => {
-    list = a;
-    console.log('list:', list); // Verifica el contenido de list en la consola
-    
-    const product = list[productId]; // Obtiene el producto específico usando el índice productId
-    if (product) {
-      this.render(product); // Pasa el producto específico a la función render()
-    } else {
-      console.log('Producto no encontrado');
-    }
-  });
-}
-
-slideImage(imgId){
-  const displayWidth = this.shadowRoot.querySelector('.img-showcase img:first-child').clientWidth;
-
-  this.shadowRoot.querySelector('.img-showcase').style.transform = `translateX(${- (imgId - 1) * displayWidth}px)`;
-}
 
 
 render(product){
@@ -100,7 +101,7 @@ render(product){
          <a href="#"><i class="icon bi-search"></i></a>
        </li>
        <li>
-         <a href="#"><i class="icon bi-cart"></i></a>
+         <a href="./cart/index.html"><i class="icon bi-cart"></i></a>
        </li>
        <li>
          <a href="#"><i class="icon bi-person"></i></a>
@@ -164,9 +165,10 @@ render(product){
 <li class="text">Description: <span class="text-li-info">${product.Description}</span></li>
 
 </ul>
-<button class="shop-now-button">
-<i class="bi-cart"></i>SHOP NOW
+<button class="shop-now-button" data-id="${product.id}">
+  <i class="bi-cart"></i>SHOP NOW
 </button>
+
 
 </section>
 
@@ -317,6 +319,13 @@ Jessica
 </footer>
 
   `
+  const shopNowButton = this.shadowRoot.querySelector('.shop-now-button');
+  if (shopNowButton) {
+    shopNowButton.addEventListener('click', () => {
+      this.addToCart(product);
+    });
+  }
+
   const imgs = this.shadowRoot.querySelectorAll('.img-select a');
   const imgBtns = [...imgs];
   console.log(imgs)
@@ -343,3 +352,5 @@ Jessica
 }
 customElements.define("app-card", cardwrapper);
 export default cardwrapper;
+// card-wrapper.js
+

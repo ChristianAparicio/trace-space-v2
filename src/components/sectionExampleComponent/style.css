@@ -1,0 +1,15 @@
+.section-comp {
+  min-height: 300px;
+  background-color: lightgray;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.section-comp h1 {
+  color: purple;
+}
+.section-comp__subtitle {
+  color: blue;
+}/*# sourceMappingURL=style.css.map */

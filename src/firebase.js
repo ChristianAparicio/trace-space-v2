@@ -54,6 +54,16 @@ export async function createProductCollection() {
   }
 }
 
+export async function addPayment(paymentData) {
+  try {
+    const collectionRef = collection(db, "payments");
+    await addDoc(collectionRef, paymentData);
+    console.log("Payment added successfully");
+  } catch (error) {
+    console.error("Error adding payment: ", error);
+  }
+}
+
 // Call the function to create the collection and add products
 
 onAuthStateChanged(auth, (user) => {
