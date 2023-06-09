@@ -139,7 +139,7 @@ class Cartspace extends HTMLElement {
         }
       </style>
       <div class="cart">
-        <h2>Cart</h2>
+        
         ${cartItems}
         <div class="total-price text-white">Total: $${this.totalPrice}</div>
         <button class="btn btn-success accept-payment-button" ${
