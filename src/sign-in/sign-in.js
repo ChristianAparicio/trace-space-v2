@@ -37,8 +37,8 @@ async function logIn() {
     let password = document.getElementById('password').value;
     let full_name = document.getElementById('full_name').value;
 
-    let mainImage = document.getElementById('profileimg').files[0]
-    let img1= await subirImagen(mainImage)
+    // let mainImage = document.getElementById('profileimg').files[0]
+    // let img1= await subirImagen(mainImage)
  
   
 
@@ -62,7 +62,7 @@ async function logIn() {
         email : email,
         full_name : full_name,
         last_login : Date.now(),
-        pic:pic,
+        // pic:pic,
       }
 
       await setDoc(doc(db, "users", userId), user_data);
@@ -93,7 +93,7 @@ async function logIn() {
       email : email,
       full_name : full_name,
       last_login : Date.now(),
-      pic:pic,
+      // pic:pic,
     }
 
     // Push to Firebase Database
@@ -194,22 +194,22 @@ function login () {
     }
   }
 
-  async function subirImagen(file) {
-    try {
-        const image = await subirImagenReferencia(file);
-        return getDownloadURL(ref(storage, image.ref.fullPath))
-    } catch (error) {
-      console.log(error);
-    }
-}
+//   async function subirImagen(file) {
+//     try {
+//         const image = await subirImagenReferencia(file);
+//         return getDownloadURL(ref(storage, image.ref.fullPath))
+//     } catch (error) {
+//       console.log(error);
+//     }
+// }
 
-async function subirImagenReferencia(file) {
-  try {
-      const storageRef = ref(storage, `images/profile/${file.name}`);
-      return await uploadBytes(storageRef, file);
+// async function subirImagenReferencia(file) {
+//   try {
+//       const storageRef = ref(storage, `images/profile/${file.name}`);
+//       return await uploadBytes(storageRef, file);
 
-  } catch (error) {
-      console.log(error);
-  }
-}
+//   } catch (error) {
+//       console.log(error);
+//   }
+// }
 
